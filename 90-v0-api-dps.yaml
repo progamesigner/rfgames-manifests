@@ -1,0 +1,70 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: v0-api-dps
+  namespace: default
+  labels:
+    app.kubernetes.io/name: v0-api-dps
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: v0-api-dps
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: v0-api-dps
+    spec:
+      containers:
+      - name: gw2-dps-report
+        image: progamesigner/gw2-dps-report:latest
+        imagePullPolicy: Always
+        ports:
+        - name: http
+          containerPort: 3000
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            path: /
+            port: http
+        readinessProbe:
+          httpGet:
+            path: /
+            port: http
+        resources: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: v0-api-dps
+  labels:
+    app.kubernetes.io/name: v0-api-dps
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: http
+    protocol: TCP
+    name: http
+  selector:
+    app.kubernetes.io/name: v0-api-dps
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: v0-api-dps
+  labels:
+    app.kubernetes.io/name: v0-api-dps
+  annotations:
+    nginx.ingress.kubernetes.io/enable-cors: true
+    nginx.ingress.kubernetes.io/cors-allow-origin: '*'
+    nginx.ingress.kubernetes.io/cors-allow-methods: 'GET,POST,OPTIONS'
+spec:
+  rules:
+  - host: dps.rfgames.tw
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: v0-api-dps
+          servicePort: http
