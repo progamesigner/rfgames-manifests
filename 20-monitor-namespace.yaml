@@ -1,0 +1,8 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: monitor
+  labels:
+    app.kubernetes.io/name: monitor
+    app.kubernetes.io/part-of: monitor
