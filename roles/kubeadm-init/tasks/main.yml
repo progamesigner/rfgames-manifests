@@ -1,0 +1,24 @@
+- name: Initialize kubernetes cluster
+  command:
+    argv:
+    - kubeadm
+    - init
+    - --config=/etc/kubernetes/kubeadm-config.yaml
+    - --skip-phases=addon/kube-proxy
+    - --skip-token-print
+
+- name: Install default kubernetes resources
+  command:
+    argv:
+    - kubectl
+    - apply
+    - --kubeconfig=/etc/kubernetes/admin.conf
+    - --filename=/etc/kubernetes/{{ item }}.yaml
+  with_items:
+  - kube-router
+
+- name: Fetch kubeconfig
+  fetch:
+    src: /etc/kubernetes/admin.conf
+    dest: kubeconfig
+    flat: yes
