@@ -3,7 +3,7 @@
 ## Components
  * Ingress Controller (Nginx)
  * Monitor (Prometheus and Altermanager)
- * Cert Manager
+ * CertManager
  * Applications
 
 ## Apply

@@ -13,4 +13,6 @@ resources:
 - ./30-cert-namespace.yaml
 - ./31-cert-crds.yaml
 - ./32-cert-manager.yaml
+- ./33-cert-issuer.yaml
 - ./90-v0-api-dps.yaml
+- ./91-v1-root-redirect.yaml
