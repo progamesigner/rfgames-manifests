@@ -62,8 +62,6 @@ metadata:
     nginx.ingress.kubernetes.io/cors-allow-origin: '*'
     nginx.ingress.kubernetes.io/enable-cors: 'true'
     nginx.ingress.kubernetes.io/server-snippet: |
-      ssl_stapling on;
-      ssl_stapling_verify on;
       ssl_trusted_certificate /etc/ingress-controller/ssl/default-tls-tw-rfgames-dps.pem;
 spec:
   rules:
