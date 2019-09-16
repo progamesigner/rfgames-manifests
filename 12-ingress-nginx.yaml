@@ -170,6 +170,7 @@ spec:
             - --configmap=$(POD_NAMESPACE)/nginx-configuration
             - --default-backend-service=default/default-backend
             - --default-ssl-certificate=default/default-cert
+            - --enable-dynamic-certificates=false
             - --enable-ssl-chain-completion=true
             - --publish-service=$(POD_NAMESPACE)/ingress-nginx
             - --tcp-services-configmap=$(POD_NAMESPACE)/tcp-services
