@@ -4,6 +4,7 @@ resources:
 - ./10-ingress-namespace.yaml
 - ./11-ingress-config.yaml
 - ./12-ingress-nginx.yaml
+- ./13-ingress-default.yaml
 - ./20-monitor-namespace.yaml
 - ./21-monitor-crds.yaml
 - ./22-monitor-config.yaml
@@ -15,4 +16,3 @@ resources:
 - ./32-cert-manager.yaml
 - ./33-cert-issuer.yaml
 - ./90-v0-api-dps.yaml
-- ./91-v1-root-redirect.yaml
