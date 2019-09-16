@@ -166,11 +166,13 @@ spec:
           image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.25.1
           args:
             - /nginx-ingress-controller
+            - --annotations-prefix=nginx.ingress.kubernetes.io
             - --configmap=$(POD_NAMESPACE)/nginx-configuration
+            - --default-backend-service=default/default-backend
+            - --default-ssl-certificate=default/default-cert
+            - --publish-service=$(POD_NAMESPACE)/ingress-nginx
             - --tcp-services-configmap=$(POD_NAMESPACE)/tcp-services
             - --udp-services-configmap=$(POD_NAMESPACE)/udp-services
-            - --publish-service=$(POD_NAMESPACE)/ingress-nginx
-            - --annotations-prefix=nginx.ingress.kubernetes.io
           securityContext:
             allowPrivilegeEscalation: true
             capabilities:
@@ -234,3 +236,89 @@ spec:
     - name: https
       port: 443
       targetPort: https
+# https://kubernetes.github.io/ingress-nginx/deploy/validating-webhook/
+# ---
+# apiVersion: certmanager.k8s.io/v1alpha1
+# kind: Issuer
+# metadata:
+#   name: ingress-nginx-webhook-selfsign
+#   namespace: ingress-nginx
+#   labels:
+#     app.kubernetes.io/name: webhook
+#     app.kubernetes.io/part-of: ingress-nginx
+# spec:
+#   selfSigned: {}
+# ---
+# apiVersion: certmanager.k8s.io/v1alpha1
+# kind: Certificate
+# metadata:
+#   name: ingress-nginx-webhook-ca
+#   namespace: ingress-nginx
+#   labels:
+#     app.kubernetes.io/name: webhook
+#     app.kubernetes.io/part-of: ingress-nginx
+# spec:
+#   secretName: ingress-nginx-webhook-ca
+#   duration: 43800h # 5 years
+#   issuerRef:
+#     name: ingress-nginx-webhook-selfsign
+#   commonName: ca.webhook.ingress-nginx
+#   isCA: true
+# ---
+# apiVersion: certmanager.k8s.io/v1alpha1
+# kind: Issuer
+# metadata:
+#   name: ingress-nginx-webhook-ca
+#   namespace: ingress-nginx
+#   labels:
+#     app.kubernetes.io/name: webhook
+#     app.kubernetes.io/part-of: ingress-nginx
+# spec:
+#   ca:
+#     secretName: ingress-nginx-webhook-ca
+# ---
+# apiVersion: certmanager.k8s.io/v1alpha1
+# kind: Certificate
+# metadata:
+#   name: ingress-nginx-webhook-webhook-tls
+#   namespace: ingress-nginx
+#   labels:
+#     app.kubernetes.io/name: webhook
+#     app.kubernetes.io/part-of: ingress-nginx
+# spec:
+#   secretName: ingress-nginx-webhook-webhook-tls
+#   duration: 8760h # 1 year
+#   issuerRef:
+#     name: ingress-nginx-webhook-ca
+#   dnsNames:
+#   - ingress-nginx-webhook
+#   - ingress-nginx-webhook.ingress-nginx
+#   - ingress-nginx-webhook.ingress-nginx.svc
+# ---
+# apiVersion: admissionregistration.k8s.io/v1beta1
+# kind: ValidatingWebhookConfiguration
+# metadata:
+#   name: ingress-nginx-webhook
+#   labels:
+#     app.kubernetes.io/name: webhook
+#     app.kubernetes.io/part-of: ingress-nginx
+#   annotations:
+#     certmanager.k8s.io/inject-apiserver-ca: 'true'
+# webhooks:
+# - name: validate.nginx.ingress.kubernetes.io
+#   rules:
+#   - apiGroups:
+#     - extensions
+#     apiVersions:
+#     - v1beta1
+#     operations:
+#     - CREATE
+#     - UPDATE
+#     resources:
+#     - ingresses
+#   failurePolicy: Fail
+#   clientConfig:
+#     service:
+#       namespace: ingress-nginx
+#       name: ingress-validation-webhook
+#       path: /extensions/v1beta1/ingress
