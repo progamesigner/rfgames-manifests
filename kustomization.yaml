@@ -16,3 +16,4 @@ resources:
 - ./32-cert-manager.yaml
 - ./33-cert-issuer.yaml
 - ./90-v0-api-dps.yaml
+- ./99-certificates.yaml

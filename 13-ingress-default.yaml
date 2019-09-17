@@ -64,20 +64,3 @@ spec:
         backend:
           serviceName: default-backend
           servicePort: http
----
-apiVersion: certmanager.k8s.io/v1alpha1
-kind: Certificate
-metadata:
-  name: default-cert
-  namespace: default
-spec:
-  secretName: default-cert
-  issuerRef:
-    name: letsencrypt
-  commonName: rfgames.tw
-  acme:
-    config:
-    - http01: {}
-      domains:
-      - rfgames.tw
-      - www.rfgames.tw
