@@ -8,5 +8,6 @@
 
 ## Apply
 ```
+kubectl create secret generic ca --namespace=default --from-file=ca.crt=ca.pem
 kubectl apply -k .
 ```

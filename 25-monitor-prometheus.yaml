@@ -190,10 +190,11 @@ subjects:
 apiVersion: monitoring.coreos.com/v1
 kind: Prometheus
 metadata:
-  name: prometheus
+  name: rfgames
   namespace: monitor
   labels:
-    prometheus: rfgames
+    app.kubernetes.io/name: prometheus
+    app.kubernetes.io/part-of: monitor
 spec:
   alerting:
     alertmanagers:
@@ -205,9 +206,10 @@ spec:
     kubernetes.io/os: linux
   podMonitorSelector: {}
   replicas: 2
+  externalUrl: http://apis.rfgames.tw/v1/prometheus
   resources:
     requests:
-      memory: 400Mi
+      memory: 100Mi
   ruleSelector:
     matchLabels:
       prometheus: rfgames
@@ -227,7 +229,6 @@ metadata:
   name: prometheus-alert-rules
   namespace: monitor
   labels:
-    prometheus: rfgames
     role: rfgames-alert-rules
     app.kubernetes.io/name: prometheus
     app.kubernetes.io/part-of: monitor
@@ -1410,20 +1411,55 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: prometheus-rfgames
+  name: prometheus
   namespace: monitor
   labels:
-    prometheus: rfgames
     app.kubernetes.io/name: prometheus
     app.kubernetes.io/part-of: monitor
 spec:
+  type: ClusterIP
   ports:
   - name: web
     port: 9090
+    protocol: TCP
     targetPort: web
   selector:
     prometheus: rfgames
-  sessionAffinity: ClientIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus
+  namespace: default
+  labels:
+    app.kubernetes.io/name: prometheus
+    app.kubernetes.io/part-of: monitor
+spec:
+  type: ExternalName
+  externalName: prometheus.monitor.svc.cluster.local
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: prometheus
+  namespace: default
+  annotations:
+    nginx.ingress.kubernetes.io/auth-tls-secret: default/ca
+    nginx.ingress.kubernetes.io/auth-tls-verify-client: 'on'
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  rules:
+  - host: apis.rfgames.tw
+    http:
+      paths:
+      - backend:
+          serviceName: prometheus
+          servicePort: 9090
+        path: /v1/prometheus(/|$)(.*)
+  tls:
+  - hosts:
+    - apis.rfgames.tw
+    secretName: tls-tw-rfgames-apis
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
