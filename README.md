@@ -1,7 +1,13 @@
-Infrastructure for RFGames
-===
+# Kubernetes Manifests for RFGames
 
-Includes:
- - Dockerfiles
- - Kubernetes manifests
- - Ansible playbooks
+## Components
+ * Ingress Controller (Nginx)
+ * Monitor (Prometheus and Altermanager)
+ * CertManager
+ * Applications
+
+## Apply
+```
+kubectl create secret generic ca --namespace=default --from-file=ca.crt=ca.pem
+kubectl apply -k .
+```

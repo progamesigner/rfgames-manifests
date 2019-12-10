@@ -1,0 +1,49 @@
+---
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: default-cert
+  namespace: default
+spec:
+  secretName: default-cert
+  issuerRef:
+    name: letsencrypt
+  commonName: rfgames.tw
+  acme:
+    config:
+    - http01: {}
+      domains:
+      - rfgames.tw
+      - www.rfgames.tw
+---
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: cert-tw-rfgames-dps
+  namespace: default
+spec:
+  secretName: tls-tw-rfgames-dps
+  issuerRef:
+    name: letsencrypt
+  commonName: dps.rfgames.tw
+  acme:
+    config:
+    - http01: {}
+      domains:
+      - dps.rfgames.tw
+---
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: cert-tw-rfgames-apis
+  namespace: default
+spec:
+  secretName: tls-tw-rfgames-apis
+  issuerRef:
+    name: letsencrypt
+  commonName: apis.rfgames.tw
+  acme:
+    config:
+    - http01: {}
+      domains:
+      - apis.rfgames.tw

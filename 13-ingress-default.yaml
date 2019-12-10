@@ -1,0 +1,66 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: default-backend
+  namespace: default
+  labels:
+    app.kubernetes.io/name: default-backend
+    app.kubernetes.io/part-of: ingress-nginx
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: default-backend
+      app.kubernetes.io/part-of: ingress-nginx
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: default-backend
+        app.kubernetes.io/part-of: ingress-nginx
+    spec:
+      containers:
+      - name: default-backend
+        image: nuvo/default-backend:0.1.0
+        ports:
+        - name: http
+          containerPort: 9090
+        resources: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: default-backend
+  namespace: default
+  labels:
+    app.kubernetes.io/name: default-backend
+    app.kubernetes.io/part-of: ingress-nginx
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: http
+    protocol: TCP
+    name: http
+  selector:
+    app.kubernetes.io/name: default-backend
+    app.kubernetes.io/part-of: ingress-nginx
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: default-backend
+  namespace: default
+  labels:
+    app.kubernetes.io/name: default-backend
+  annotations:
+    nginx.ingress.kubernetes.io/server-snippet: |
+      ssl_trusted_certificate /etc/ingress-controller/ssl/default-default-cert.pem;
+spec:
+  rules:
+  - host: ''
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: default-backend
+          servicePort: http
