@@ -1,0 +1,49 @@
+---
+apiVersion: kubeadm.k8s.io/v1beta2
+kind: ClusterConfiguration
+clusterName: {{ cluster_name }}
+controlPlaneEndpoint: {{ cluster_apiserver_address }}:{{ cluster_apiserver_port }}
+kubernetesVersion: {{ cluster_kubernetes_version }}
+useHyperKubeImage: true
+apiServer:
+  certSANs:
+  - localhost
+  - {{ cluster_apiserver_address }}
+  extraArgs:
+    allow-privileged: "true"
+controllerManager:
+  extraArgs:
+    enable-hostpath-provisioner: "true"
+networking:
+  podSubnet: {{ cluster_pod_subnet }}
+  serviceSubnet: {{ cluster_service_subnet }}
+  dnsDomain: {{ cluster_dns_domain }}
+---
+apiVersion: kubeadm.k8s.io/v1beta2
+kind: InitConfiguration
+nodeRegistration:
+  taints: []
+  ignorePreflightErrors:
+  - NumCPU
+---
+apiVersion: kubeadm.k8s.io/v1beta2
+kind: JoinConfiguration
+nodeRegistration:
+  taints: []
+  ignorePreflightErrors:
+  - NumCPU
+---
+apiVersion: kubelet.config.k8s.io/v1beta1
+kind: KubeletConfiguration
+cgroupDriver: systemd
+evictionHard:
+  imagefs.available: "0%"
+  imagefs.inodesFree: "0%"
+  memory.available: "100Mi"
+  nodefs.available: "0%"
+  nodefs.inodesFree: "0%"
+imageGCHighThresholdPercent: 100
+maxPods: 50
+---
+apiVersion: kubeproxy.config.k8s.io/v1alpha1
+kind: KubeProxyConfiguration
