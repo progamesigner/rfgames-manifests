@@ -19,6 +19,8 @@ spec:
       - name: rfgames-application
         image: progamesigner/rfgames-apply-api-server:1.0
         env:
+        - name: SERVER_CORS_ORIGIN
+          value: https://rfgames.tw
         - name: SERVER_BIND_ADDR
           value: 0.0.0.0
         - name: SERVER_LISTEN_PORT
