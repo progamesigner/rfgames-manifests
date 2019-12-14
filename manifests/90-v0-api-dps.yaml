@@ -31,7 +31,7 @@ spec:
           httpGet:
             path: /
             port: http
-        resources: {}
+        resources:
 ---
 apiVersion: v1
 kind: Service
@@ -49,30 +49,3 @@ spec:
     name: http
   selector:
     app.kubernetes.io/name: v0-api-dps
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: v0-api-dps
-  namespace: default
-  labels:
-    app.kubernetes.io/name: v0-api-dps
-  annotations:
-    nginx.ingress.kubernetes.io/cors-allow-methods: GET,POST,OPTIONS
-    nginx.ingress.kubernetes.io/cors-allow-origin: '*'
-    nginx.ingress.kubernetes.io/enable-cors: 'true'
-    nginx.ingress.kubernetes.io/server-snippet: |
-      ssl_trusted_certificate /etc/ingress-controller/ssl/default-tls-tw-rfgames-dps.pem;
-spec:
-  rules:
-  - host: dps.rfgames.tw
-    http:
-      paths:
-      - backend:
-          serviceName: v0-api-dps
-          servicePort: http
-        path: /
-  tls:
-  - hosts:
-    - dps.rfgames.tw
-    secretName: tls-tw-rfgames-dps

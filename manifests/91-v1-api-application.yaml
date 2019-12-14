@@ -1,0 +1,57 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: v1-api-application
+  namespace: default
+  labels:
+    app.kubernetes.io/name: v1-api-application
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: v1-api-application
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: v1-api-application
+    spec:
+      containers:
+      - name: rfgames-application
+        image: progamesigner/rfgames-apply-api-server:1.0
+        env:
+        - name: SERVER_BIND_ADDR
+          value: 0.0.0.0
+        - name: SERVER_LISTEN_PORT
+          value: '3000'
+        - name: DISCORD_WEBHOOK_URL
+          valueFrom:
+            configMapKeyRef:
+              key: APPLY_DISCORD_WEBHOOK
+              name: api-server-configs
+        ports:
+        - name: http
+          containerPort: 3000
+          protocol: TCP
+        livenessProbe:
+          tcpSocket:
+            port: http
+        readinessProbe:
+          tcpSocket:
+            port: http
+        resources:
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: v1-api-application
+  labels:
+    app.kubernetes.io/name: v1-api-application
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: http
+    protocol: TCP
+    name: http
+  selector:
+    app.kubernetes.io/name: v1-api-application

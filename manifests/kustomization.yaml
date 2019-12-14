@@ -21,4 +21,7 @@ resources:
 - ./32-cert-manager.yaml
 - ./33-cert-issuer.yaml
 - ./90-v0-api-dps.yaml
+- ./91-v1-api-application.yaml
+- ./92-v1-api-contact.yaml
+- ./98-ingress.yaml
 - ./99-certificates.yaml

@@ -1,0 +1,58 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: v0-api-backend
+  namespace: default
+  labels:
+    app.kubernetes.io/name: v0-api-backend
+  annotations:
+    nginx.ingress.kubernetes.io/cors-allow-methods: GET,POST,OPTIONS
+    nginx.ingress.kubernetes.io/cors-allow-origin: '*'
+    nginx.ingress.kubernetes.io/enable-cors: 'true'
+    nginx.ingress.kubernetes.io/server-snippet: |
+      ssl_trusted_certificate /etc/ingress-controller/ssl/default-tls-tw-rfgames-dps.pem;
+spec:
+  rules:
+  - host: dps.rfgames.tw
+    http:
+      paths:
+      - backend:
+          serviceName: v0-api-dps
+          servicePort: http
+        path: /
+  tls:
+  - hosts:
+    - dps.rfgames.tw
+    secretName: tls-tw-rfgames-dps
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: v1-api-backend
+  namespace: default
+  labels:
+    app.kubernetes.io/name: v1-api-backend
+  annotations:
+    nginx.ingress.kubernetes.io/cors-allow-methods: 'GET,POST,OPTIONS'
+    nginx.ingress.kubernetes.io/cors-allow-origin: '*'
+    nginx.ingress.kubernetes.io/enable-cors: 'true'
+    nginx.ingress.kubernetes.io/server-snippet: |
+      ssl_trusted_certificate /etc/ingress-controller/ssl/default-tls-tw-rfgames-apis.pem;
+spec:
+  rules:
+  - host: apis.rfgames.tw
+    http:
+      paths:
+      - backend:
+          serviceName: v1-api-application
+          servicePort: http
+        path: /v1/application
+      - backend:
+          serviceName: v1-api-contact
+          servicePort: http
+        path: /v1/contact
+  tls:
+  - hosts:
+    - apis.rfgames.tw
+    secretName: tls-tw-rfgames-apis
