@@ -19,6 +19,22 @@ spec:
 apiVersion: certmanager.k8s.io/v1alpha1
 kind: Certificate
 metadata:
+  name: cert-tw-rfgames-cluster
+  namespace: default
+spec:
+  secretName: tls-tw-rfgames-cluster
+  issuerRef:
+    name: letsencrypt
+  commonName: cluster.rfgames.tw
+  acme:
+    config:
+    - http01: {}
+      domains:
+      - cluster.rfgames.tw
+---
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
   name: cert-tw-rfgames-dps
   namespace: default
 spec:

@@ -206,7 +206,7 @@ spec:
     kubernetes.io/os: linux
   podMonitorSelector: {}
   replicas: 2
-  externalUrl: http://apis.rfgames.tw/v1/prometheus
+  externalUrl: http://cluster.rfgames.tw/v1/prometheus
   resources:
     requests:
       memory: 100Mi
@@ -1437,29 +1437,6 @@ metadata:
 spec:
   type: ExternalName
   externalName: prometheus.monitor.svc.cluster.local
----
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: prometheus
-  namespace: default
-  annotations:
-    nginx.ingress.kubernetes.io/auth-tls-secret: default/ca
-    nginx.ingress.kubernetes.io/auth-tls-verify-client: 'on'
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
-spec:
-  rules:
-  - host: apis.rfgames.tw
-    http:
-      paths:
-      - backend:
-          serviceName: prometheus
-          servicePort: 9090
-        path: /v1/prometheus(/|$)(.*)
-  tls:
-  - hosts:
-    - apis.rfgames.tw
-    secretName: tls-tw-rfgames-apis
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
