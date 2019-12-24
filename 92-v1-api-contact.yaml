@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: rfgames-contact-api-server
-        image: progamesigner/rfgames-contact-api-server:1.1
+        image: progamesigner/rfgames-contact-api-server:1.2
         env:
         - name: CONTACT_WEBHOOK_URL
           valueFrom:

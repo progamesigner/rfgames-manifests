@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: rfgames-apply-api-server
-        image: progamesigner/rfgames-apply-api-server:1.1
+        image: progamesigner/rfgames-apply-api-server:1.2
         env:
         - name: APPLY_WEBHOOK_URL
           valueFrom:
