@@ -1,9 +1,0 @@
-cluster_name: rfgames
-cluster_kubernetes_version: 1.15.3
-
-cluster_apiserver_address: "{{ hostvars[groups['masters'][0]]['ansible_default_ipv4']['address'] }}"
-cluster_apiserver_port: 6443
-
-cluster_dns_domain: cluster.local
-cluster_pod_subnet: 10.0.0.0/8
-cluster_service_subnet: 10.96.0.0/12
