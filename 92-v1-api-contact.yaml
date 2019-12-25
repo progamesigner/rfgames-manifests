@@ -21,9 +21,9 @@ spec:
         env:
         - name: CONTACT_WEBHOOK_URL
           valueFrom:
-            configMapKeyRef:
+            secretKeyRef:
               key: CONTACT_DISCORD_WEBHOOK
-              name: api-server-configs
+              name: cluster-configs
         ports:
         - name: http
           containerPort: 80
@@ -36,7 +36,7 @@ spec:
             port: http
         resources:
           limits:
-            cpu: 200m
+            cpu: 50m
             memory: 64Mi
 ---
 apiVersion: v1

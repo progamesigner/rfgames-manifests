@@ -6,9 +6,7 @@ metadata:
   namespace: default
   labels:
     app.kubernetes.io/name: default-backend
-  annotations:
-    nginx.ingress.kubernetes.io/server-snippet: |
-      ssl_trusted_certificate /etc/ingress-controller/ssl/default-default-cert.pem;
+    app.kubernetes.io/part-of: default-backend
 spec:
   rules:
   - host: ''
@@ -26,12 +24,11 @@ metadata:
   namespace: default
   labels:
     app.kubernetes.io/name: v0-api-backend
+    app.kubernetes.io/part-of: v0-api-backend
   annotations:
     nginx.ingress.kubernetes.io/cors-allow-methods: GET,POST,OPTIONS
     nginx.ingress.kubernetes.io/cors-allow-origin: '*'
     nginx.ingress.kubernetes.io/enable-cors: 'true'
-    nginx.ingress.kubernetes.io/server-snippet: |
-      ssl_trusted_certificate /etc/ingress-controller/ssl/default-tls-tw-rfgames-dps.pem;
 spec:
   rules:
   - host: dps.rfgames.tw
@@ -53,13 +50,11 @@ metadata:
   namespace: default
   labels:
     app.kubernetes.io/name: v1-api-backend
+    app.kubernetes.io/part-of: v1-api-backend
   annotations:
     nginx.ingress.kubernetes.io/cors-allow-methods: GET,POST,OPTIONS
     nginx.ingress.kubernetes.io/cors-allow-origin: https://rfgames.tw
     nginx.ingress.kubernetes.io/enable-cors: 'true'
-    nginx.ingress.kubernetes.io/rewrite-target: /
-    nginx.ingress.kubernetes.io/server-snippet: |
-      ssl_trusted_certificate /etc/ingress-controller/ssl/default-tls-tw-rfgames-apis.pem;
 spec:
   rules:
   - host: apis.rfgames.tw

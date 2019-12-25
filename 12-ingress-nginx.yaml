@@ -167,10 +167,9 @@ spec:
           args:
             - /nginx-ingress-controller
             - --annotations-prefix=nginx.ingress.kubernetes.io
-            - --configmap=$(POD_NAMESPACE)/nginx-configuration
-            - --default-ssl-certificate=default/default-cert
-            - --enable-dynamic-certificates=false
-            - --enable-ssl-chain-completion=true
+            - --configmap=$(POD_NAMESPACE)/nginx-configs
+            - --default-backend-service=default/default-backend
+            - --default-ssl-certificate=default/tls-tw-rfgames-apis
             - --publish-service=$(POD_NAMESPACE)/ingress-nginx
             - --tcp-services-configmap=$(POD_NAMESPACE)/tcp-services
             - --udp-services-configmap=$(POD_NAMESPACE)/udp-services

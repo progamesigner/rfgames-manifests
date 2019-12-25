@@ -32,6 +32,9 @@ spec:
             path: /
             port: http
         resources:
+          limits:
+            cpu: 200m
+            memory: 512Mi
 ---
 apiVersion: v1
 kind: Service
