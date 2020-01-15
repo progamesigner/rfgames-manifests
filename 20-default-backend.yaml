@@ -26,7 +26,7 @@ spec:
           containerPort: 9090
         resources:
           limits:
-            cpu: 50m
+            cpu: 10m
             memory: 32Mi
 ---
 apiVersion: v1
