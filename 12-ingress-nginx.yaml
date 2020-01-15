@@ -163,7 +163,7 @@ spec:
       serviceAccountName: ingress-nginx
       containers:
         - name: ingress-nginx-controller
-          image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.25.1
+          image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.27.0
           args:
             - /nginx-ingress-controller
             - --annotations-prefix=nginx.ingress.kubernetes.io
@@ -180,7 +180,7 @@ spec:
               - ALL
               add:
               - NET_BIND_SERVICE
-            runAsUser: 33
+            runAsUser: 101
           env:
           - name: POD_NAME
             valueFrom:
