@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: rfgames-apply-api-server
-        image: progamesigner/rfgames-apply-api-server:1.2
+        image: progamesigner/rfgames-apply-api-server:1.3
         env:
         - name: APPLY_WEBHOOK_URL
           valueFrom:
@@ -26,7 +26,7 @@ spec:
               name: cluster-configs
         ports:
         - name: http
-          containerPort: 80
+          containerPort: 8080
           protocol: TCP
         livenessProbe:
           tcpSocket:
