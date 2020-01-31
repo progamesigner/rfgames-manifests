@@ -5,7 +5,7 @@ resources:
 - ./v0-api-dps.yaml
 - ./v1-api-apply.yaml
 - ./v1-api-contact.yaml
-- ./ingress.yaml
+- ./ingresses.yaml
 - ./certificates.yaml
 secretGenerator:
 - env: .env.production
