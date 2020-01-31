@@ -1,20 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-secretGenerator:
-- env: .env.production
-  namespace: default
-  name: cluster-configs
-resources:
-- ./10-ingress-namespace.yaml
-- ./11-ingress-config.yaml
-- ./12-ingress-nginx.yaml
-- ./30-cert-namespace.yaml
-- ./31-cert-crds.yaml
-- ./32-cert-manager.yaml
-- ./33-cert-issuer.yaml
-- ./90-default-backend.yaml
-- ./91-v0-api-dps.yaml
-- ./92-v1-api-apply.yaml
-- ./93-v1-api-contact.yaml
-- ./98-ingress.yaml
-- ./99-certificates.yaml
+bases:
+- ./ingress
+- ./cert-manager
+- ./services
