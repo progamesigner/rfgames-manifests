@@ -35,20 +35,3 @@ spec:
           limits:
             cpu: 200m
             memory: 512Mi
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: v0-api-dps
-  namespace: default
-  labels:
-    app.kubernetes.io/name: v0-api-dps
-spec:
-  type: ClusterIP
-  ports:
-  - port: 80
-    targetPort: http
-    protocol: TCP
-    name: http
-  selector:
-    app.kubernetes.io/name: v0-api-dps

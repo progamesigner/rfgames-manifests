@@ -38,19 +38,3 @@ spec:
           limits:
             cpu: 30m
             memory: 32Mi
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: v1-api-contact
-  labels:
-    app.kubernetes.io/name: v1-api-contact
-spec:
-  type: ClusterIP
-  ports:
-  - port: 80
-    targetPort: http
-    protocol: TCP
-    name: http
-  selector:
-    app.kubernetes.io/name: v1-api-contact

@@ -6,6 +6,7 @@ resources:
 - ./v1-api-apply.yaml
 - ./v1-api-contact.yaml
 - ./policies.yaml
+- ./services.yaml
 - ./ingresses.yaml
 - ./certificates.yaml
 secretGenerator:
