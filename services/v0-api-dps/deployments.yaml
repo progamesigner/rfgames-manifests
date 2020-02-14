@@ -15,6 +15,7 @@ spec:
       labels:
         app.kubernetes.io/name: v0-api-dps
     spec:
+      automountServiceAccountToken: false
       containers:
       - name: gw2-dps-report
         image: progamesigner/gw2-dps-report:latest
@@ -28,8 +29,7 @@ spec:
             path: /
             port: http
         readinessProbe:
-          httpGet:
-            path: /
+          tcpSocket:
             port: http
         resources:
           limits:

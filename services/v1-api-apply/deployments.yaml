@@ -15,6 +15,7 @@ spec:
       labels:
         app.kubernetes.io/name: v1-api-apply
     spec:
+      automountServiceAccountToken: false
       containers:
       - name: rfgames-apply-api-server
         image: progamesigner/rfgames-apply-api-server:latest
