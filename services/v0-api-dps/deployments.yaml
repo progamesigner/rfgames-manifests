@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: gw2-dps-report
-        image: progamesigner/gw2-dps-report:0.8.4
+        image: progamesigner/gw2-dps-report:latest
         imagePullPolicy: Always
         ports:
         - name: http
