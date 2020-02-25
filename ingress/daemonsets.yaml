@@ -24,16 +24,17 @@ spec:
       serviceAccountName: ingress-nginx
       containers:
         - name: ingress-nginx-controller
-          image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.27.0
+          image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.30.0
           args:
-            - /nginx-ingress-controller
-            - --annotations-prefix=nginx.ingress.kubernetes.io
-            - --configmap=$(POD_NAMESPACE)/nginx-configs
-            - --default-backend-service=default/default-backend
-            - --default-ssl-certificate=default/tls-tw-rfgames-apis
-            - --publish-service=$(POD_NAMESPACE)/ingress-nginx
-            - --tcp-services-configmap=$(POD_NAMESPACE)/tcp-services
-            - --udp-services-configmap=$(POD_NAMESPACE)/udp-services
+          - /nginx-ingress-controller
+          - --annotations-prefix=nginx.ingress.kubernetes.io
+          - --configmap=$(POD_NAMESPACE)/nginx-configs
+          - --default-backend-service=default/default-backend
+          - --default-ssl-certificate=default/tls-tw-rfgames-apis
+          - --enable-ssl-chain-completion=true
+          - --publish-service=$(POD_NAMESPACE)/ingress-nginx
+          - --tcp-services-configmap=$(POD_NAMESPACE)/tcp-services
+          - --udp-services-configmap=$(POD_NAMESPACE)/udp-services
           securityContext:
             allowPrivilegeEscalation: true
             capabilities:
