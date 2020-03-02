@@ -11,7 +11,7 @@ images:
 - name: progamesigner/rfgames-contact-api-server
   newTag: 1.3.1
 - name: progamesigner/gw2-dps-report
-  newTag: 0.8.5
+  newTag: 0.8.6
 resources:
 - ./policies.yaml
 - ./ingresses.yaml
