@@ -7,9 +7,9 @@ bases:
 - ./v1-api-contact
 images:
 - name: progamesigner/rfgames-apply-api-server
-  newTag: 1.3.1
+  newTag: 1.4.0
 - name: progamesigner/rfgames-contact-api-server
-  newTag: 1.3.1
+  newTag: 1.4.0
 - name: progamesigner/gw2-dps-report
   newTag: 0.8.6
 resources:
