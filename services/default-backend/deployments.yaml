@@ -18,15 +18,13 @@ spec:
       automountServiceAccountToken: false
       containers:
       - name: default-backend
-        image: nuvo/default-backend:0.1.0
+        image: progamesigner/rfgames-default-backend:latest
         ports:
         - name: http
-          containerPort: 9090
+          containerPort: 8080
         livenessProbe:
-          tcpSocket:
-            port: http
-        readinessProbe:
-          tcpSocket:
+          httpGet:
+            path: /healthz
             port: http
         resources:
           limits:

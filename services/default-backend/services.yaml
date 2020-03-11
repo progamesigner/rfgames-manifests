@@ -9,9 +9,8 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-  - port: 80
+  - name: http
+    port: 8080
     targetPort: http
-    protocol: TCP
-    name: http
   selector:
     app.kubernetes.io/name: default-backend
