@@ -7,11 +7,10 @@ metadata:
   labels:
     app.kubernetes.io/name: v0-api-dps
 spec:
-  type: ClusterIP
   ports:
-  - port: 80
+  - name: http
+    port: 8080
     targetPort: http
-    protocol: TCP
-    name: http
   selector:
     app.kubernetes.io/name: v0-api-dps
+  type: ClusterIP

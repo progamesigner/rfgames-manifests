@@ -10,9 +10,9 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-    - protocol: TCP
-      port: 9402
-      targetPort: 9402
+  - name: prometheus
+    port: 9402
+    targetPort: prometheus
   selector:
     app.kubernetes.io/name: cert-manager
     app.kubernetes.io/part-of: cert-manager

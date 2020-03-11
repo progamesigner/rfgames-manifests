@@ -72,8 +72,8 @@ spec:
         - --webhook-serving-secret=cert-manager-webhook-tls
         - --webhook-dns-names=cert-manager-webhook,cert-manager-webhook.cert-manager,cert-manager-webhook.cert-manager.svc
         ports:
-        - containerPort: 9402
-          protocol: TCP
+        - name: prometheus
+          containerPort: 9402
         env:
         - name: POD_NAMESPACE
           valueFrom:
