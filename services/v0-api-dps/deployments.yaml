@@ -2,10 +2,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: v0-api-dps
-  namespace: default
   labels:
     app.kubernetes.io/name: v0-api-dps
+  name: v0-api-dps
+  namespace: default
 spec:
   selector:
     matchLabels:

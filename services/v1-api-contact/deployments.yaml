@@ -2,10 +2,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: v1-api-contact
-  namespace: default
   labels:
     app.kubernetes.io/name: v1-api-contact
+  name: v1-api-contact
+  namespace: default
 spec:
   selector:
     matchLabels:
