@@ -2,11 +2,11 @@
 apiVersion: cert-manager.io/v1alpha2
 kind: Issuer
 metadata:
-  name: letsencrypt
-  namespace: default
   labels:
     app.kubernetes.io/name: letsencrypt-issuer
     app.kubernetes.io/part-of: cert-manager
+  name: letsencrypt
+  namespace: default
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory

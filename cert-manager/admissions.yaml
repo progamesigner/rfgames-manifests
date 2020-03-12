@@ -2,12 +2,12 @@
 apiVersion: admissionregistration.k8s.io/v1beta1
 kind: MutatingWebhookConfiguration
 metadata:
-  name: cert-manager-webhook
+  annotations:
+    cert-manager.io/inject-ca-from-secret: cert-manager/cert-manager-webhook-tls
   labels:
     app.kubernetes.io/name: cert-manager-webhook
     app.kubernetes.io/part-of: cert-manager
-  annotations:
-    cert-manager.io/inject-ca-from-secret: cert-manager/cert-manager-webhook-tls
+  name: cert-manager-webhook
 webhooks:
 - name: webhook.cert-manager.io
   rules:
@@ -32,12 +32,12 @@ webhooks:
 apiVersion: admissionregistration.k8s.io/v1beta1
 kind: ValidatingWebhookConfiguration
 metadata:
-  name: cert-manager-webhook
+  annotations:
+    cert-manager.io/inject-ca-from-secret: cert-manager/cert-manager-webhook-tls
   labels:
     app.kubernetes.io/name: cert-manager-webhook
     app.kubernetes.io/part-of: cert-manager
-  annotations:
-    cert-manager.io/inject-ca-from-secret: cert-manager/cert-manager-webhook-tls
+  name: cert-manager-webhook
 webhooks:
 - name: webhook.cert-manager.io
   namespaceSelector:
