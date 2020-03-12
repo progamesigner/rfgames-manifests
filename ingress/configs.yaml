@@ -2,11 +2,11 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: nginx-configs
-  namespace: ingress-nginx
   labels:
     app.kubernetes.io/name: ingress-nginx
     app.kubernetes.io/part-of: ingress-nginx
+  name: nginx-configs
+  namespace: ingress-nginx
 data:
   hsts-preload: 'true'
   server-tokens: 'false'
@@ -20,29 +20,29 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: tcp-services
-  namespace: ingress-nginx
   labels:
     app.kubernetes.io/name: ingress-nginx
     app.kubernetes.io/part-of: ingress-nginx
+  name: tcp-services
+  namespace: ingress-nginx
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: udp-services
-  namespace: ingress-nginx
   labels:
     app.kubernetes.io/name: ingress-nginx
     app.kubernetes.io/part-of: ingress-nginx
+  name: udp-services
+  namespace: ingress-nginx
 ---
 apiVersion: v1
 kind: Secret
 metadata:
-  name: dhparam
-  namespace: ingress-nginx
   labels:
     app.kubernetes.io/name: ingress-nginx
     app.kubernetes.io/part-of: ingress-nginx
+  name: dhparam
+  namespace: ingress-nginx
 data:
   dhparam.pem: LS0tLS1CRUdJTiBESCBQQVJBTUVURVJTLS0tLS0KTUlJQ0NBS0NBZ0VBblpHNkk4MnJ2T0diTnZNR1lWQmlzeEFmOVE1N2JYeTZTeHEvVWFkUExoczJTdW9PV0hCZAp4dmlUTVRUd21SUUdFUDV3K0lpb3FsZVFzSzZsRGpYK3cwZ1V4ZEkxVFMwdjljOC9Xd1lBMzJvM1JMSmJxOGJvCm42eFdOSXgxR2tVcEEwNkRnNHVvWE9HakorWWQvRGpZSGlwYnkwZmc0bEZrZURNaFZXTVp4eFNlM0hBY2VuakEKSVVScGtPM3ZHQ2tENlFOaDhtU0NZcUlKeVZSaWxscnVKNkpHajZWc0lkZWNXd3FwclFpeU1HSWNrNU9oWXJ0SQpKV0tVWUlpUVNqQ0wrYTZkUDZESjFzWmczUVMyZnlTamFJa3VEc2tCd01zNlJYWW41MWtXWUV5Wm1BTW51SmRmClg2QlpKLzJhcXVCQ0ZnWXYrdkVlWFVJUjNITmlyNVVaN0RIZVJVTlc5TjJlUWRpTmM1dkJ1eGxaOFExZWFKeWMKckcyTDNBK3dwK1NUclNQS1BvcGVCZCtucjdqRUlYejNENXNTMFdsRElGRk5ubno2bzFUWEt4SzU2bkpYVTl1UApiRTNCQnNxRnA5ellId3M4bWI2YUF4d0MrWEtvSXlrRVd1enNLaCt6cVluWWRuL3FDNlR5K2lzVnZ4UTU0WjZJCjZXbHFHMkpucnUyYjZqU0FZSURLdVdQMjR5UlE5MW9qdmU3emtkMmNicERuUzFmL1M5MUhTdlYrYVNKUyswUFcKeXdlUmJ5T3RIMmQzTkM2MTErYndBOGM1SDBhMXlLRTBkTUdtYVhnbWZ2WDZMQUNTUHRWNzBJL3RKeGY0RkYrbwpSUG1TYi9vVHRSSHBqcXFHOUdZNXZHQUlOUmoxeTh1bUFGUS9RNU5JOUMyTW1MbHIvUThGbDRzQ0FRST0KLS0tLS1FTkQgREggUEFSQU1FVEVSUy0tLS0tCg==
 type: Opaque
