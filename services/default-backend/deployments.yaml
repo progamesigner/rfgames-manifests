@@ -2,16 +2,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: default-backend
-  namespace: default
   labels:
     app.kubernetes.io/name: default-backend
+  name: default-backend
+  namespace: default
 spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: default-backend
   template:
     metadata:
+      annotations:
+        prometheus.io/path: /metrics
+        prometheus.io/port: '9402'
+        prometheus.io/scrape: 'true'
       labels:
         app.kubernetes.io/name: default-backend
     spec:
@@ -22,10 +26,12 @@ spec:
         ports:
         - name: http
           containerPort: 8080
+        - name: prometheus
+          containerPort: 9402
         livenessProbe:
           httpGet:
             path: /healthz
-            port: http
+            port: prometheus
         resources:
           limits:
             cpu: 10m

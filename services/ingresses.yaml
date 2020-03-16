@@ -2,8 +2,6 @@
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /404
   labels:
     app.kubernetes.io/name: default-backend
     app.kubernetes.io/part-of: default-backend
@@ -12,13 +10,6 @@ metadata:
 spec:
   rules:
   - host: ''
-    http:
-      paths:
-      - backend:
-          serviceName: default-backend
-          servicePort: http
-        path: /
-  - host: apis.rfgames.tw
     http:
       paths:
       - backend:
