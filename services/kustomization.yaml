@@ -7,13 +7,13 @@ bases:
 - ./v1-api-contact
 images:
 - name: progamesigner/rfgames-default-backend
-  newTag: 1.1.0
+  newTag: 1.2.1
 - name: progamesigner/rfgames-apply-api-server
-  newTag: 1.4.0
+  newTag: 1.4.1
 - name: progamesigner/rfgames-contact-api-server
-  newTag: 1.4.0
+  newTag: 1.4.1
 - name: progamesigner/gw2-dps-report
-  newTag: 0.8.8
+  newTag: 0.8.9
 resources:
 - ./policies.yaml
 - ./ingresses.yaml
