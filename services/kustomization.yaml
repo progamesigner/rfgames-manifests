@@ -7,7 +7,7 @@ bases:
 - ./v1-api-contact
 images:
 - name: progamesigner/rfgames-default-backend
-  newTag: 1.2.1
+  newTag: 1.2.2
 - name: progamesigner/rfgames-apply-api-server
   newTag: 1.4.1
 - name: progamesigner/rfgames-contact-api-server
