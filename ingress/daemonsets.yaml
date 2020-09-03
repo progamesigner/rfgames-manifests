@@ -24,7 +24,7 @@ spec:
       serviceAccountName: ingress-nginx
       containers:
         - name: ingress-nginx-controller
-          image: quay.io/kubernetes-ingress-controller/nginx-ingress-controller:latest
+          image: k8s.gcr.io/ingress-nginx/controller:latest
           args:
           - /nginx-ingress-controller
           - --annotations-prefix=nginx.ingress.kubernetes.io
