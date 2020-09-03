@@ -16,3 +16,21 @@ spec:
   selector:
     app.kubernetes.io/name: cert-manager
     app.kubernetes.io/part-of: cert-manager
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/name: cert-manager-webhook
+    app.kubernetes.io/part-of: cert-manager
+  name: cert-manager-webhook
+  namespace: cert-manager
+spec:
+  ports:
+  - name: https
+    port: 443
+    targetPort: 10250
+  selector:
+    app.kubernetes.io/name: cert-manager-webhook
+    app.kubernetes.io/part-of: cert-manager
+  type: ClusterIP

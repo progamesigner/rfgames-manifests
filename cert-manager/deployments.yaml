@@ -90,7 +90,7 @@ metadata:
     app.kubernetes.io/name: cert-manager-webhook
     app.kubernetes.io/part-of: cert-manager
   name: cert-manager-webhook
-  namespace: 'cert-manager'
+  namespace: cert-manager
 spec:
   replicas: 1
   selector:
@@ -111,8 +111,9 @@ spec:
         args:
         - --v=2
         - --secure-port=10250
-        - --tls-cert-file=/certs/tls.crt
-        - --tls-private-key-file=/certs/tls.key
+        - --dynamic-serving-ca-secret-namespace=$(POD_NAMESPACE)
+        - --dynamic-serving-ca-secret-name=cert-manager-webhook-ca
+        - --dynamic-serving-dns-names=cert-manager-webhook,cert-manager-webhook.cert-manager,cert-manager-webhook.cert-manager.svc
         livenessProbe:
           httpGet:
             path: /livez
@@ -132,10 +133,3 @@ spec:
           requests:
             cpu: 10m
             memory: 16Mi
-        volumeMounts:
-        - name: certs
-          mountPath: /certs
-      volumes:
-      - name: certs
-        secret:
-          secretName: cert-manager-webhook-tls
