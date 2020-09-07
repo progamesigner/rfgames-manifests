@@ -7,18 +7,28 @@ bases:
 - ./v1-api-contact
 images:
 - name: progamesigner/rfgames-default-backend
+  newName: docker.pkg.github.com/progamesigner/rfgames-default-backend/rfgames-default-backend
   newTag: 1.2.2
 - name: progamesigner/rfgames-apply-api-server
+  newName: docker.pkg.github.com/progamesigner/rfgames-backend/rfgames-apply-api-server
   newTag: 1.4.1
 - name: progamesigner/rfgames-contact-api-server
+  newName: docker.pkg.github.com/progamesigner/rfgames-backend/rfgames-contact-api-server
   newTag: 1.4.1
 - name: progamesigner/gw2-dps-report
+  newName: docker.pkg.github.com/progamesigner/gw2-dps-report/gw2-dps-report
   newTag: 0.8.15
 resources:
-- ./policies.yaml
-- ./ingresses.yaml
 - ./certificates.yaml
+- ./ingresses.yaml
+- ./policies.yaml
+- ./rbac.yaml
 secretGenerator:
 - env: .env.production
-  namespace: default
   name: cluster-configs
+  namespace: default
+- files:
+  - .dockerconfigjson
+  name: github-packages
+  namespace: default
+  type: kubernetes.io/dockerconfigjson
