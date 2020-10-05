@@ -17,7 +17,7 @@ images:
   newTag: 1.4.1
 - name: progamesigner/gw2-dps-report
   newName: docker.pkg.github.com/progamesigner/gw2-dps-report/gw2-dps-report
-  newTag: 0.8.15
+  newTag: 0.8.16
 resources:
 - ./certificates.yaml
 - ./ingresses.yaml
