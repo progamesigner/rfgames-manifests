@@ -11,10 +11,10 @@ images:
   newTag: 1.2.2
 - name: progamesigner/rfgames-apply-api-server
   newName: ghcr.io/progamesigner/rfgames-apply-api-server
-  newTag: 1.4.1
+  newTag: 1.4.2
 - name: progamesigner/rfgames-contact-api-server
   newName: ghcr.io/progamesigner/rfgames-contact-api-server
-  newTag: 1.4.1
+  newTag: 1.4.2
 - name: progamesigner/gw2-dps-report
   newName: ghcr.io/progamesigner/gw2-dps-report
   newTag: 0.8.18
