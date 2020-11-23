@@ -4,4 +4,4 @@ metadata:
   name: rfgames-services
   namespace: default
 imagePullSecrets:
-- name: github-packages
+- name: ghcr

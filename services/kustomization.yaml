@@ -29,6 +29,6 @@ secretGenerator:
   namespace: default
 - files:
   - .dockerconfigjson
-  name: github-packages
+  name: ghcr
   namespace: default
   type: kubernetes.io/dockerconfigjson
