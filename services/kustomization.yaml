@@ -8,7 +8,7 @@ bases:
 images:
 - name: progamesigner/rfgames-default-backend
   newName: ghcr.io/progamesigner/rfgames-default-backend
-  newTag: 1.2.2
+  newTag: 1.2.3
 - name: progamesigner/rfgames-apply-api-server
   newName: ghcr.io/progamesigner/rfgames-apply-api-server
   newTag: 1.4.2
