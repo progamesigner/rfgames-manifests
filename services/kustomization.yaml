@@ -7,16 +7,16 @@ bases:
 - ./v1-api-contact
 images:
 - name: progamesigner/rfgames-default-backend
-  newName: docker.pkg.github.com/progamesigner/rfgames-default-backend/rfgames-default-backend
+  newName: ghcr.io/progamesigner/rfgames-default-backend
   newTag: 1.2.2
 - name: progamesigner/rfgames-apply-api-server
-  newName: docker.pkg.github.com/progamesigner/rfgames-backend/rfgames-apply-api-server
+  newName: ghcr.io/progamesigner/rfgames-apply-api-server
   newTag: 1.4.1
 - name: progamesigner/rfgames-contact-api-server
-  newName: docker.pkg.github.com/progamesigner/rfgames-backend/rfgames-contact-api-server
+  newName: ghcr.io/progamesigner/rfgames-contact-api-server
   newTag: 1.4.1
 - name: progamesigner/gw2-dps-report
-  newName: docker.pkg.github.com/progamesigner/gw2-dps-report/gw2-dps-report
+  newName: ghcr.io/progamesigner/gw2-dps-report
   newTag: 0.8.18
 resources:
 - ./certificates.yaml
