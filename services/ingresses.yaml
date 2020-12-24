@@ -57,6 +57,36 @@ metadata:
   namespace: default
 spec:
   rules:
+  - host: api.rfgames.tw
+    http:
+      paths:
+      - backend:
+          serviceName: v1-api-apply
+          servicePort: http
+        path: /v1/apply
+      - backend:
+          serviceName: v1-api-contact
+          servicePort: http
+        path: /v1/contact
+  tls:
+  - hosts:
+    - api.rfgames.tw
+    secretName: tls-tw-rfgames-api
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/cors-allow-methods: GET,POST,OPTIONS
+    nginx.ingress.kubernetes.io/cors-allow-origin: https://rfgames.tw
+    nginx.ingress.kubernetes.io/enable-cors: 'true'
+  labels:
+    app.kubernetes.io/name: v1-api-backend-apis
+    app.kubernetes.io/part-of: v1-api-backend
+  name: v1-api-backend-apis
+  namespace: default
+spec:
+  rules:
   - host: apis.rfgames.tw
     http:
       paths:
