@@ -30,7 +30,7 @@ spec:
           - --annotations-prefix=nginx.ingress.kubernetes.io
           - --configmap=$(POD_NAMESPACE)/nginx-configs
           - --default-backend-service=default/default-backend
-          - --default-ssl-certificate=default/tls-tw-rfgames-apis
+          - --default-ssl-certificate=default/tls-tw-rfgames-api
           - --enable-ssl-chain-completion=true
           - --publish-service=$(POD_NAMESPACE)/ingress-nginx
           - --tcp-services-configmap=$(POD_NAMESPACE)/tcp-services

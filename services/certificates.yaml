@@ -24,16 +24,3 @@ spec:
   commonName: api.rfgames.tw
   dnsNames:
   - api.rfgames.tw
----
-apiVersion: cert-manager.io/v1alpha2
-kind: Certificate
-metadata:
-  name: cert-tw-rfgames-apis
-  namespace: default
-spec:
-  secretName: tls-tw-rfgames-apis
-  issuerRef:
-    name: letsencrypt
-  commonName: apis.rfgames.tw
-  dnsNames:
-  - apis.rfgames.tw
