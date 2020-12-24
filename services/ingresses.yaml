@@ -1,5 +1,5 @@
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   labels:
@@ -13,11 +13,14 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: default-backend
-          servicePort: http
+          service:
+            name: default-backend
+            port:
+              name: http
         path: /
+        pathType: Prefix
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
@@ -35,15 +38,18 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: v0-api-dps
-          servicePort: http
+          service:
+            name: v0-api-dps
+            port:
+              name: http
         path: /
+        pathType: Prefix
   tls:
   - hosts:
     - dps.rfgames.tw
     secretName: tls-tw-rfgames-dps
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
@@ -61,19 +67,25 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: v1-api-apply
-          servicePort: http
+          service:
+            name: v1-api-apply
+            port:
+              name: http
         path: /v1/apply
+        pathType: Prefix
       - backend:
-          serviceName: v1-api-contact
-          servicePort: http
+          service:
+            name: v1-api-contact
+            port:
+              name: http
         path: /v1/contact
+        pathType: Prefix
   tls:
   - hosts:
     - api.rfgames.tw
     secretName: tls-tw-rfgames-api
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
@@ -91,13 +103,19 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: v1-api-apply
-          servicePort: http
+          service:
+            name: v1-api-apply
+            port:
+              name: http
         path: /v1/apply
+        pathType: Prefix
       - backend:
-          serviceName: v1-api-contact
-          servicePort: http
+          service:
+            name: v1-api-contact
+            port:
+              name: http
         path: /v1/contact
+        pathType: Prefix
   tls:
   - hosts:
     - apis.rfgames.tw
