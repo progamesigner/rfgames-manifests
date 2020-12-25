@@ -18,6 +18,8 @@ spec:
         prometheus.io/port: '10254'
         prometheus.io/scrape: 'true'
       labels:
+        app.kubernetes.io/component: controller
+        app.kubernetes.io/instance: ingress-nginx
         app.kubernetes.io/name: ingress-nginx
         app.kubernetes.io/part-of: ingress-nginx
     spec:
