@@ -17,7 +17,7 @@ images:
   newTag: 1.4.2
 - name: progamesigner/gw2-dps-report
   newName: ghcr.io/progamesigner/gw2-dps-report
-  newTag: 0.8.18
+  newTag: 0.8.21
 resources:
 - ./certificates.yaml
 - ./ingresses.yaml
