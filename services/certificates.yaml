@@ -24,3 +24,16 @@ spec:
   commonName: api.rfgames.tw
   dnsNames:
   - api.rfgames.tw
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: cert-tw-rfgames-discord
+  namespace: default
+spec:
+  secretName: tls-tw-rfgames-discord
+  issuerRef:
+    name: letsencrypt
+  commonName: discord.rfgames.tw
+  dnsNames:
+  - discord.rfgames.tw

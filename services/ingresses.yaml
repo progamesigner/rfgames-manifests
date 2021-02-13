@@ -84,3 +84,21 @@ spec:
   - hosts:
     - api.rfgames.tw
     secretName: tls-tw-rfgames-api
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/temporal-redirect: https://discord.gg/xsSWwn3
+  labels:
+    app.kubernetes.io/name: v1-discord-backend
+    app.kubernetes.io/part-of: v1-discord-backend
+  name: v1-discord-backend
+  namespace: default
+spec:
+  rules:
+  - host: discord.rfgames.tw
+  tls:
+  - hosts:
+    - discord.rfgames.tw
+    secretName: tls-tw-rfgames-discord
