@@ -35,10 +35,10 @@ spec:
         resources:
           limits:
             cpu: 100m
-            memory: 32Mi
+            memory: 64Mi
           requests:
             cpu: 10m
-            memory: 16Mi
+            memory: 32Mi
 ---
 apiVersion: apps/v1
 kind: Deployment
