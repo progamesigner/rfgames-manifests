@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+images:
+- name: calebdoxsey/kubernetes-cloudflare-sync
+  newTag: v0.2.0
+resources:
+- ./namespace.yaml
+- ./rbac.yaml
+- ./deployments.yaml
+secretGenerator:
+- env: .env.production
+  name: cloudflare-configs
+  namespace: cloudflare

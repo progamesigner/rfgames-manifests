@@ -1,0 +1,53 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: cloudflare
+    app.kubernetes.io/part-of: cloudflare
+  name: cloudflare
+  namespace: cloudflare
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: cloudflare
+      app.kubernetes.io/part-of: cloudflare
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: cloudflare
+        app.kubernetes.io/part-of: cloudflare
+    spec:
+      serviceAccountName: cloudflare
+      containers:
+      - name: cloudflare
+        image: calebdoxsey/kubernetes-cloudflare-sync:latest
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: CF_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: cloudflare-configs
+              key: CF_API_KEY
+        - name: CF_API_EMAIL
+          valueFrom:
+            secretKeyRef:
+              name: cloudflare-configs
+              key: CF_API_EMAIL
+        - name: CF_PROXY
+          value: 'false'
+        - name: CF_TTL
+          value: '0'
+        - name: DNS_NAME
+          valueFrom:
+            secretKeyRef:
+              name: cloudflare-configs
+              key: DNS_NAME
+        resources:
+          limits:
+            cpu: 100m
+            memory: 32Mi
+          requests:
+            cpu: 10m
+            memory: 16Mi

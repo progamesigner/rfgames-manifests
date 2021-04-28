@@ -1,0 +1,8 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.kubernetes.io/name: cloudflare
+    app.kubernetes.io/part-of: cloudflare
+  name: cloudflare
