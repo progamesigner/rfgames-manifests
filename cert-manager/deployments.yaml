@@ -33,6 +33,9 @@ spec:
             fieldRef:
               fieldPath: metadata.namespace
         resources:
+          limits:
+            cpu: 100m
+            memory: 32Mi
           requests:
             cpu: 10m
             memory: 16Mi
@@ -79,9 +82,12 @@ spec:
             fieldRef:
               fieldPath: metadata.namespace
         resources:
+          limits:
+            cpu: 100m
+            memory: 32Mi
           requests:
             cpu: 10m
-            memory: 32Mi
+            memory: 16Mi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -130,6 +136,9 @@ spec:
             fieldRef:
               fieldPath: metadata.namespace
         resources:
+          limits:
+            cpu: 100m
+            memory: 32Mi
           requests:
             cpu: 10m
             memory: 16Mi
