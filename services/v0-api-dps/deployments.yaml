@@ -29,6 +29,9 @@ spec:
             port: http
         resources:
           limits:
-            cpu: 50m
+            cpu: 300m
             memory: 256Mi
+          requests:
+            cpu: 50m
+            memory: 32Mi
       serviceAccountName: rfgames-services

@@ -44,7 +44,7 @@ spec:
               key: DNS_NAME
         resources:
           limits:
-            cpu: 100m
+            cpu: 50m
             memory: 32Mi
           requests:
             cpu: 10m

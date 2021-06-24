@@ -34,8 +34,11 @@ spec:
             port: prometheus
         resources:
           limits:
-            cpu: 10m
+            cpu: 100m
             memory: 32Mi
+          requests:
+            cpu: 10m
+            memory: 16Mi
       securityContext:
         runAsNonRoot: true
         runAsUser: 999
