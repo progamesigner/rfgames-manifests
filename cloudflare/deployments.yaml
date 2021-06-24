@@ -19,11 +19,9 @@ spec:
         app.kubernetes.io/name: cloudflare
         app.kubernetes.io/part-of: cloudflare
     spec:
-      serviceAccountName: cloudflare
       containers:
       - name: cloudflare
         image: calebdoxsey/kubernetes-cloudflare-sync:latest
-        imagePullPolicy: IfNotPresent
         env:
         - name: CF_API_KEY
           valueFrom:
@@ -51,3 +49,4 @@ spec:
           requests:
             cpu: 10m
             memory: 16Mi
+      serviceAccountName: cloudflare

@@ -19,11 +19,9 @@ spec:
         app.kubernetes.io/name: cert-manager-cainjector
         app.kubernetes.io/part-of: cert-manager
     spec:
-      serviceAccountName: cert-manager-cainjector
       containers:
       - name: cert-manager
         image: quay.io/jetstack/cert-manager-cainjector:latest
-        imagePullPolicy: IfNotPresent
         args:
         - --v=2
         - --leader-election-namespace=kube-system
@@ -39,6 +37,7 @@ spec:
           requests:
             cpu: 10m
             memory: 32Mi
+      serviceAccountName: cert-manager-cainjector
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -64,23 +63,21 @@ spec:
         app.kubernetes.io/name: cert-manager
         app.kubernetes.io/part-of: cert-manager
     spec:
-      serviceAccountName: cert-manager
       containers:
       - name: cert-manager
         image: quay.io/jetstack/cert-manager-controller:latest
-        imagePullPolicy: IfNotPresent
         args:
         - --v=2
         - --cluster-resource-namespace=$(POD_NAMESPACE)
         - --leader-election-namespace=kube-system
-        ports:
-        - name: prometheus
-          containerPort: 9402
         env:
         - name: POD_NAMESPACE
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
+        ports:
+        - name: prometheus
+          containerPort: 9402
         resources:
           limits:
             cpu: 100m
@@ -88,6 +85,7 @@ spec:
           requests:
             cpu: 10m
             memory: 16Mi
+      serviceAccountName: cert-manager
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -109,17 +107,20 @@ spec:
         app.kubernetes.io/name: cert-manager-webhook
         app.kubernetes.io/part-of: cert-manager
     spec:
-      serviceAccountName: cert-manager-webhook
       containers:
       - name: cert-manager
         image: quay.io/jetstack/cert-manager-webhook:latest
-        imagePullPolicy: IfNotPresent
         args:
         - --v=2
         - --secure-port=10250
         - --dynamic-serving-ca-secret-namespace=$(POD_NAMESPACE)
         - --dynamic-serving-ca-secret-name=cert-manager-webhook-ca
         - --dynamic-serving-dns-names=cert-manager-webhook,cert-manager-webhook.cert-manager,cert-manager-webhook.cert-manager.svc
+        env:
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
         livenessProbe:
           httpGet:
             path: /livez
@@ -130,11 +131,6 @@ spec:
             path: /healthz
             port: 6080
             scheme: HTTP
-        env:
-        - name: POD_NAMESPACE
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.namespace
         resources:
           limits:
             cpu: 100m
@@ -142,3 +138,4 @@ spec:
           requests:
             cpu: 10m
             memory: 16Mi
+      serviceAccountName: cert-manager-webhook
