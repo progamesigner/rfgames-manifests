@@ -8,6 +8,7 @@ metadata:
   name: default-backend
   namespace: default
 spec:
+  ingressClassName: ingress-nginx
   rules:
   - host: ''
     http:
@@ -33,6 +34,7 @@ metadata:
   name: v0-api-backend
   namespace: default
 spec:
+  ingressClassName: ingress-nginx
   rules:
   - host: dps.rfgames.tw
     http:
@@ -62,6 +64,7 @@ metadata:
   name: v1-api-backend
   namespace: default
 spec:
+  ingressClassName: ingress-nginx
   rules:
   - host: api.rfgames.tw
     http:
@@ -96,6 +99,7 @@ metadata:
   name: v1-discord-backend
   namespace: default
 spec:
+  ingressClassName: ingress-nginx
   rules:
   - host: discord.rfgames.tw
   tls:

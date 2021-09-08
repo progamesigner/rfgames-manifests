@@ -4,8 +4,9 @@ images:
 - name: k8s.gcr.io/ingress-nginx/controller
   newTag: v1.0.0
 resources:
-- ./namespace.yaml
-- ./rbac.yaml
 - ./configs.yaml
 - ./daemonsets.yaml
+- ./ingressclasses.yaml
+- ./namespace.yaml
+- ./rbac.yaml
 - ./services.yaml
