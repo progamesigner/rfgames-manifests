@@ -1,5 +1,5 @@
 ---
-apiVersion: policy/v1beta1
+apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
   name: default-backend-pdb
@@ -9,7 +9,7 @@ spec:
     matchLabels:
       app.kubernetes.io/name: default-backend
 ---
-apiVersion: policy/v1beta1
+apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
   name: v0-api-dps-pdb
@@ -19,7 +19,7 @@ spec:
     matchLabels:
       app.kubernetes.io/name: v0-api-dps
 ---
-apiVersion: policy/v1beta1
+apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
   name: v1-api-apply-pdb
@@ -29,7 +29,7 @@ spec:
     matchLabels:
       app.kubernetes.io/name: v1-api-apply
 ---
-apiVersion: policy/v1beta1
+apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
   name: v1-api-contact-pdb
