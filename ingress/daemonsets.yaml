@@ -24,57 +24,64 @@ spec:
         app.kubernetes.io/part-of: ingress-nginx
     spec:
       containers:
-        - name: ingress-nginx-controller
-          image: k8s.gcr.io/ingress-nginx/controller:latest
-          args:
-          - /nginx-ingress-controller
-          - --annotations-prefix=nginx.ingress.kubernetes.io
-          - --configmap=$(POD_NAMESPACE)/nginx-configs
-          - --default-backend-service=default/default-backend
-          - --default-ssl-certificate=default/tls-tw-rfgames-api
-          - --enable-ssl-chain-completion=true
-          - --publish-service=$(POD_NAMESPACE)/ingress-nginx
-          - --tcp-services-configmap=$(POD_NAMESPACE)/tcp-services
-          - --udp-services-configmap=$(POD_NAMESPACE)/udp-services
-          securityContext:
-            allowPrivilegeEscalation: true
-            capabilities:
-              drop:
-              - ALL
-              add:
-              - NET_BIND_SERVICE
-            runAsUser: 101
-          env:
-          - name: POD_NAME
-            valueFrom:
-              fieldRef:
-                fieldPath: metadata.name
-          - name: POD_NAMESPACE
-            valueFrom:
-              fieldRef:
-                fieldPath: metadata.namespace
-          ports:
-          - name: http
-            containerPort: 80
-          - name: https
-            containerPort: 443
-          livenessProbe:
-            failureThreshold: 3
-            httpGet:
-              path: /healthz
-              port: 10254
-            initialDelaySeconds: 10
-            periodSeconds: 10
-            successThreshold: 1
-            timeoutSeconds: 10
-          readinessProbe:
-            failureThreshold: 3
-            httpGet:
-              path: /healthz
-              port: 10254
-            periodSeconds: 10
-            successThreshold: 1
-            timeoutSeconds: 10
+      - name: ingress-nginx-controller
+        image: k8s.gcr.io/ingress-nginx/controller:latest
+        args:
+        - /nginx-ingress-controller
+        - --annotations-prefix=nginx.ingress.kubernetes.io
+        - --configmap=$(POD_NAMESPACE)/nginx-configs
+        - --default-backend-service=default/default-backend
+        - --default-ssl-certificate=default/tls-tw-rfgames-api
+        - --enable-ssl-chain-completion=true
+        - --publish-service=$(POD_NAMESPACE)/ingress-nginx
+        - --tcp-services-configmap=$(POD_NAMESPACE)/tcp-services
+        - --udp-services-configmap=$(POD_NAMESPACE)/udp-services
+        securityContext:
+          allowPrivilegeEscalation: true
+          capabilities:
+            drop:
+            - ALL
+            add:
+            - NET_BIND_SERVICE
+          runAsUser: 101
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        ports:
+        - name: http
+          containerPort: 80
+        - name: https
+          containerPort: 443
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /healthz
+            port: 10254
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 10
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /healthz
+            port: 10254
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 10
+        resources:
+          limits:
+            cpu: 2000m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
       dnsPolicy: ClusterFirstWithHostNet
       hostNetwork: true
       serviceAccountName: ingress-nginx
