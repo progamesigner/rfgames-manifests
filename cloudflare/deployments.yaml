@@ -42,11 +42,4 @@ spec:
             secretKeyRef:
               name: cloudflare-configs
               key: DNS_NAME
-        resources:
-          limits:
-            cpu: 50m
-            memory: 32Mi
-          requests:
-            cpu: 10m
-            memory: 16Mi
       serviceAccountName: cloudflare

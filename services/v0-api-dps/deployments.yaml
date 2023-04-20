@@ -27,11 +27,4 @@ spec:
           httpGet:
             path: /
             port: http
-        resources:
-          limits:
-            cpu: 300m
-            memory: 256Mi
-          requests:
-            cpu: 50m
-            memory: 32Mi
       serviceAccountName: rfgames-services
